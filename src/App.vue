@@ -1,18 +1,15 @@
 <template>
     <!-- html结构 -->
-    <div class="app">
-        <h1>你好你好</h1>
-    </div>
+    <person/>
 
 </template>
 
 <script>
     // js或者ts
+    import person from './components/person.vue';
     export default{
-        name:'App'
+        name:'App',
+        components:{person}//注册组件
     }
 </script>
 
-<style>
-    /* 样式 */
-</style>
