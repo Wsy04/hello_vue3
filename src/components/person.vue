@@ -1,44 +1,29 @@
 <template>
     <div class="person">
-        <h2>姓名:{{ man.name }}</h2>
-        <h2>年龄:{{ man.age }}</h2>
-        <button @click="changeName">修改名字</button>
-        <button @click="changeAge">修改年龄</button>
-        <button @click="showTel">查看联系方式</button>
-        <br>
-        <h2>游戏列表</h2>
-        <ul>
-            <li v-for="g in games" :key="g.id">{{ g.name }}</li>
-        </ul>
-        <button @click="changeFirstName">修改第一个游戏的名字</button>
-        <button @click="changeGame">修改游戏</button>
+        姓: <input type="text" v-model="firstName"> <br>
+        名: <input type="text" v-model="lastName"> <br>
+        全名: <span>{{fullName}}</span><br>
+        <button @click="changeName">变成李四</button>
     </div>
 </template>
 
 <script lang="ts" setup name="person1">
-    import {reactive, ref} from 'vue'
+    import {reactive, ref,computed} from 'vue'
     //data
-    let man = ref({name:'张三',age:18,tel:'1388888888'})
-    let games = reactive([
-        {id:'aguk01',name:'三国杀'},
-        {id:'aguk02',name:'王者荣耀'},
-        {id:'aguk03',name:'黑神话:悟空'}
-    ])
-    //method
+    let firstName = ref('zhang')
+    let lastName = ref('三')
+    let fullName = computed({
+        get(){
+            return firstName.value.slice(0,1).toUpperCase()+firstName.value.slice(1) + '-'+lastName.value
+        },
+        set(val){
+            const[str1,str2] = val.split('-')
+            firstName.value = str1
+            lastName.value = str2
+        }
+    })
     function changeName(){
-        man.value.name+= 'zhangsan'
-    }
-    function changeAge(){
-        man.value.age+=1
-    }
-    function showTel(){
-        alert(man.value.tel)
-    }
-    function changeFirstName(){
-        games[0].name = '原神'
-    }
-    function changeGame(){
-        Object.assign(games[0],{id:'aguk04',name:'柚子社'})
+        fullName.value = 'li-si'
     }
 
 </script>
