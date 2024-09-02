@@ -26,7 +26,7 @@
     ])
     //method
     function changeName(){
-        man.value.name = 'zhangsan'
+        man.value.name+= 'zhangsan'
     }
     function changeAge(){
         man.value.age+=1
